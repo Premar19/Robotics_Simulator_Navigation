@@ -32,6 +32,9 @@ colcon build --packages-select prs49_ros366_cpp
 
 source install/setup.bash
 
+## How to Test:
+helloWorld is a minimal node included as a build-test—run it to confirm your ROS 2 and C++ toolchain compile correctly before building the main navigation node.
+
 ## How to Run:
 ros2 run prs49_ros366_cpp assignment --ros-args -r __ns:=/husky -r /tf:=tf -r /tf_static:=tf_static
 
