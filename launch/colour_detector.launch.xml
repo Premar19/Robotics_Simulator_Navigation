@@ -1,0 +1,16 @@
+<launch>
+    <node pkg="ros366_cv_tools" exec="colour_detector" name="colour_detector" output="screen">
+        <param name="image_topic" value="/husky/sensors/camera_0/color/image"/>
+        <param name="output_topic" value="/colour_detection"/>
+        <param name="lower_limits" value="[0,0,100]"/>
+        <param name="upper_limits" value="[50,255,50]"/>
+        <param name="show_trackbars" value="True"/>
+        <param name="flip_vertical" value="False" />
+        <param name="flip_horizontal" value="False" />
+        <param name="min_radius" value="10"/>
+    </node>
+    <!--node pkg="prs49_ros366_cpp" exec="ws5" name="ws5" namespace="husky"-->
+	<!--remap from="/tf" to="tf"/-->
+	<!--remap from="/tf_static" to="tf_static" /-->
+    <!--/node-->
+</launch>

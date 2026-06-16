@@ -1,0 +1,15 @@
+﻿# Large media
+screencast.mp4
+*.mp4
+
+# ROS / C++ build artifacts
+build/
+devel/
+install/
+log/
+*.o
+*.so
+
+# Editor
+.vscode/
+.idea/

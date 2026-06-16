@@ -1,0 +1,237 @@
+<sdf version='1.7'>
+  <world name='scenario25'>
+
+    <physics type="ode">
+      <max_step_size>0.01</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>100</real_time_update_rate>
+    </physics>
+    <plugin name='ignition::gazebo::systems::Physics' filename='libignition-gazebo-physics-system.so'/>
+    <plugin name="ignition::gazebo::systems::Sensors" filename="libignition-gazebo-sensors-system.so">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin name='ignition::gazebo::systems::UserCommands' filename='libignition-gazebo-user-commands-system.so'/>
+    <plugin name='ignition::gazebo::systems::SceneBroadcaster' filename='libignition-gazebo-scene-broadcaster-system.so'/>
+    <plugin name="ignition::gazebo::systems::Imu" filename="libignition-gazebo-imu-system.so"/>
+    <plugin name="ignition::gazebo::systems::NavSat" filename="libignition-gazebo-navsat-system.so"/>
+
+    <gui fullscreen="0">
+
+      <plugin filename="MinimalScene" name="3D View">
+          <ignition-gui>
+            <title>3D View</title>
+            <property type="bool" key="showTitleBar">false</property>
+            <property type="string" key="state">docked</property>
+          </ignition-gui>
+          <engine>ogre2</engine>
+          <scene>scene</scene>
+          <ambient_light>0.4 0.4 0.4</ambient_light>
+          <background_color>0.8 0.8 0.8</background_color>
+          <camera_pose>-6 0 6 0 0.5 0</camera_pose>
+      </plugin>
+
+      <plugin filename="EntityContextMenuPlugin" name="Entity context menu">
+          <ignition-gui>
+            <property key="state" type="string">floating</property>
+            <property key="width" type="double">5</property>
+            <property key="height" type="double">5</property>
+            <property key="showTitleBar" type="bool">false</property>
+          </ignition-gui>
+      </plugin>
+      <plugin filename="GzSceneManager" name="Scene Manager">
+          <ignition-gui>
+            <property key="resizable" type="bool">false</property>
+            <property key="width" type="double">5</property>
+            <property key="height" type="double">5</property>
+            <property key="state" type="string">floating</property>
+            <property key="showTitleBar" type="bool">false</property>
+          </ignition-gui>
+      </plugin>
+      <plugin filename="InteractiveViewControl" name="Interactive view control">
+          <ignition-gui>
+            <property key="resizable" type="bool">false</property>
+            <property key="width" type="double">5</property>
+            <property key="height" type="double">5</property>
+            <property key="state" type="string">floating</property>
+            <property key="showTitleBar" type="bool">false</property>
+          </ignition-gui>
+      </plugin>
+      <plugin filename="CameraTracking" name="Camera Tracking">
+          <ignition-gui>
+            <property key="resizable" type="bool">false</property>
+            <property key="width" type="double">5</property>
+            <property key="height" type="double">5</property>
+            <property key="state" type="string">floating</property>
+            <property key="showTitleBar" type="bool">false</property>
+          </ignition-gui>
+      </plugin>
+        <!-- World control -->
+      <plugin filename="WorldControl" name="World control">
+          <ignition-gui>
+            <title>World control</title>
+            <property type="bool" key="showTitleBar">false</property>
+            <property type="bool" key="resizable">false</property>
+            <property type="double" key="height">72</property>
+            <property type="double" key="width">121</property>
+            <property type="double" key="z">1</property>
+
+            <property type="string" key="state">floating</property>
+            <anchors target="3D View">
+              <line own="left" target="left"/>
+              <line own="bottom" target="bottom"/>
+            </anchors>
+          </ignition-gui>
+
+          <play_pause>true</play_pause>
+          <step>true</step>
+          <start_paused>false</start_paused>
+          <use_event>true</use_event>
+
+      </plugin>
+    </gui>
+
+
+
+    <model name='ground_plane'>
+      <static>true</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0.0 0.0 1</normal>
+              <size>1 1</size>
+            </plane>
+          </geometry>
+        </collision>
+      </link>
+      <pose>0 0 0 0 0 0</pose>
+    </model>
+
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <light name='spot_light' type='spot'>
+      <pose>10 5 25 0 -0 0</pose>
+      <diffuse>1 1 1 1</diffuse>
+      <specular>1 1 1 1</specular>
+      <direction>0 0 -1</direction>
+      <attenuation>
+        <range>100</range>
+        <constant>0.1</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <cast_shadows>1</cast_shadows>
+      <spot>
+        <inner_angle>0.9</inner_angle>
+        <outer_angle>1.5</outer_angle>
+        <falloff>1</falloff>
+      </spot>
+    </light>
+    <include>
+      <uri>model://coffeetable</uri>
+      <name>table1</name>
+      <pose>6.9944 -11.75679 -0.08 0 -0 0</pose>
+    </include>
+
+    <model name='colourCube'>
+      <pose>7.15 -11.8 0.4 0 0 0</pose>
+    <link name='cube1'>
+      <inertial>
+        <mass>0.009375</mass>
+        <inertia>
+          <ixx>3.91e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>3.91e-06</iyy>
+          <iyz>0</iyz>
+          <izz>3.91e-06</izz>
+        </inertia>
+      </inertial>
+      <visual name='visual'>
+        <geometry>
+          <box>
+            <size>0.18 0.18 0.18</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>1.0 0.0 0.39 1</ambient>
+          <diffuse>1.0 0.0 0.39 1</diffuse>
+          <specular>1.0 0.0 0.39 1</specular>
+        </material>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <box>
+            <size>0.18 0.18 0.18</size>
+          </box>
+        </geometry>
+      </collision>
+    </link>
+    <static>0</static>
+  </model>
+
+
+    <include>
+      <uri>model://scenario25</uri>
+      <name>scenario25_walls</name>
+      <pose>5.0 -6.5 0 0 0 -1.57</pose>
+    </include>
+
+    <!-- <include>
+      <uri>model://BlueCube</uri>
+      <name>cube2</name>
+      <pose>13.672 4.51977 0.719996 0 0 0</pose>
+    </include> -->
+   
+
+    <model name='target_box'>
+      <pose> 11.5 -11.0 0 0 0 0</pose>
+      <link name='box_0'>
+        <visual name='target_box_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size> 1.0 1.0 0.01</size>
+            </box>
+          </geometry>
+          <material>
+            <lighting>1</lighting>
+            <ambient> 0.0 1 .2 1.0 </ambient>
+            <diffuse> 0.0 1 .2 1.0 </diffuse>
+            <specular> 0.0 1 .2 1.0 </specular>
+          </material>
+        </visual>
+      </link>
+      <static>1</static>
+    </model>
+
+<!--
+    <include>
+      <uri>model://GreenBin</uri>
+      <name>bin</name>
+      <pose>13.6541 3.67158 0.010000 0 -0 0</pose>
+    </include>
+-->
+    
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose>-11.6624 0.287126 38.9374 0 1.04231 -0.05757</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+    
+  </world>
+</sdf>
