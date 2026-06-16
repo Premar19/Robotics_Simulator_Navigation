@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Autonomous Corridor Navigation, Parking and Cube Localisation
 
 ## Overview
@@ -35,5 +35,4 @@ source install/setup.bash
 ## How to Run:
 ros2 run prs49_ros366_cpp assignment --ros-args -r __ns:=/husky -r /tf:=tf -r /tf_static:=tf_static
 =======
-# Robotics_Simulator_Navigation
->>>>>>> d5826a460c8570f4d06b24f953bb29ee3cb4ae03
+
