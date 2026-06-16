@@ -22,14 +22,7 @@ find_package(tf2_ros REQUIRED)
 # find_package(<dependency> REQUIRED)
 
 add_executable(helloWorld src/helloWorld.cpp)
-add_executable(examplePublisher src/examplePublisher.cpp)
-add_executable(lidarSub src/lidarSub.cpp)
-add_executable(task src/task.cpp)
-add_executable(ws3 src/ws3.cpp)
-add_executable(ws4 src/ws4.cpp)
-add_executable(colorClient src/colourClient.cpp)
 add_executable(assignment src/assignment.cpp)
-add_executable(ws5 src/ws5.cpp)
 
 target_include_directories(helloWorld PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -38,25 +31,11 @@ target_include_directories(helloWorld PUBLIC
   link_directories(${OpenCV_LIBRARY_DIRS})
   add_definitions(${OpenCV_DEFINITIONS})
 target_compile_features(helloWorld PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
-ament_target_dependencies(examplePublisher rclcpp std_msgs)
-ament_target_dependencies(lidarSub rclcpp sensor_msgs)
-ament_target_dependencies(task rclcpp sensor_msgs)
-ament_target_dependencies(ws3 rclcpp sensor_msgs)
-ament_target_dependencies(ws4 rclcpp sensor_msgs ros366_cv_msgs rcl_interfaces)
-ament_target_dependencies(colorClient rclcpp sensor_msgs)
 ament_target_dependencies(assignment rclcpp sensor_msgs ros366_cv_msgs rcl_interfaces image_transport cv_bridge OpenCV tf2 tf2_ros)
-ament_target_dependencies(ws5 rclcpp sensor_msgs ros366_cv_msgs rcl_interfaces image_transport cv_bridge OpenCV tf2 tf2_ros)
 
 install(TARGETS
   helloWorld
-  examplePublisher
-  lidarSub
-  task
-  ws3
-  ws4
-  colorClient
   assignment
-  ws5
   DESTINATION lib/${PROJECT_NAME})
 install(DIRECTORY
 launch config
